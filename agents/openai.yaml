@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering Harness"
+  short_description: "Bootstrap and maintain an agent-ready engineering harness"
+  default_prompt: "Use $engineering-harness to bootstrap, retrofit, or improve this repo's engineering harness for agents and human collaborators."

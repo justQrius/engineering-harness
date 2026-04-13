@@ -1,0 +1,20 @@
+version: "3"
+
+tasks:
+  check:harness:
+    desc: Run repo-local harness checks
+    cmds:
+      - python scripts/audit_repo.py .
+      - python scripts/check_packet_scope.py .
+      - python scripts/check_agent_drift.py .
+
+  check:project:
+    desc: Run stack-aware project checks when matching files are present
+    cmds:
+      - python scripts/run_project_checks.py .
+
+  check:
+    desc: Run harness and project checks
+    deps:
+      - check:harness
+      - check:project
