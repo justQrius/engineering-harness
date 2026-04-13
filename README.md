@@ -103,12 +103,90 @@ python D:\Projects\KnowledgeBase\skill\scripts\kb-status.py
 
 ## Deployment
 
-The skill lives in this repo and is deployed to both Claude Code and Codex:
+The skill lives in this repo and is deployed to platform skill directories:
 
 - **Claude Code:** `~/.claude/skills/engineering-harness/`
 - **Codex:** `~/.codex/skills/engineering-harness/`
 
-Edit the source in this repo, then copy to both platform directories.
+Edit the source in this repo, then copy to the platform directory:
+
+```bash
+# macOS / Linux
+cp -r * ~/.claude/skills/engineering-harness/
+cp -r * ~/.codex/skills/engineering-harness/
+
+# Windows (Git Bash)
+cp -r * "$HOME/.claude/skills/engineering-harness/"
+cp -r * "$HOME/.codex/skills/engineering-harness/"
+```
+
+## Adapting for Codex (OpenAI)
+
+The skill works natively with Claude Code. To adapt it for Codex, address these
+differences:
+
+### Frontmatter constraints
+
+Codex validates SKILL.md frontmatter more strictly than Claude Code:
+
+| Field | Claude Code | Codex |
+|-------|------------|-------|
+| `name` | Any case, spaces allowed | Must match `^[a-z0-9-]+$` (lowercase, dashes only) |
+| `description` | No hard limit | Max 1024 characters, no angle brackets |
+| Other fields | `hooks`, `preamble-tier`, `allowed-tools` | Only `name`, `description`, `license`, `allowed-tools`, `metadata` |
+
+The current `name: engineering-harness` and description (~650 chars) already meet
+both platforms' constraints. No changes needed for frontmatter.
+
+### SKILL.md length
+
+Codex loads the entire SKILL.md into context. At 406 lines (~18KB), this is
+large. If Codex struggles with the token budget, create a trimmed version:
+
+1. Keep the Overview, Workflow, and Resources sections (the trigger and execution path)
+2. Replace inline details with one-liner references to `references/` files
+3. Target under 250 lines for the Codex version
+4. Store as `SKILL.codex.md` and deploy that version to `~/.codex/skills/`
+
+### Bash access
+
+The harness scripts (`bootstrap_harness.py`, `audit_harness.py`) require Bash
+execution and filesystem write access. Codex's sandbox may restrict:
+
+- Writing files outside the project directory
+- Running arbitrary Python scripts
+- Creating directories recursively
+
+If Codex can't run the scripts, the agent can still follow the SKILL.md workflow
+manually — the scripts are a convenience, not a requirement. The workflow steps
+(scaffold files, merge sections, audit coverage) can be done by hand.
+
+### agents/openai.yaml
+
+The `agents/openai.yaml` file configures Codex's UI:
+
+```yaml
+interface:
+  display_name: "Engineering Harness"
+  short_description: "Bootstrap and maintain an agent-ready engineering harness"
+  default_prompt: "Use $engineering-harness to bootstrap, retrofit, or improve this repo's engineering harness for agents and human collaborators."
+```
+
+Codex reads this for skill discovery and display. The `$engineering-harness`
+variable is replaced with the skill name at runtime.
+
+### AGENTS.md vs CLAUDE.md
+
+Both files serve the same purpose (agent instructions) for different audiences:
+
+- **CLAUDE.md** — Loaded automatically by Claude Code at session start. Can
+  include Claude-specific tool references and formatting.
+- **AGENTS.md** — Loaded by Codex and other agents. Should avoid Claude-specific
+  syntax and prefer universal formats (Bash commands, file paths, plain markdown).
+
+The templates use universal syntax (Bash commands, Python script paths) so both
+files work for any agent. When customizing for a specific repo, keep this
+compatibility in mind.
 
 ## License
 
