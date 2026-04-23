@@ -1,4 +1,4 @@
-# CLAUDE.md - {{PROJECT_NAME}}
+# CLAUDE.md - engineering-harness
 
 Developer context for Claude Code sessions. Read this before making changes.
 Keep this file semantically aligned with `AGENTS.md`; only filename-specific and
@@ -169,7 +169,7 @@ decisions stay in `.handoff/DECISIONS.md`.
 <!-- - Describe the build/test/run commands -->
 
 ```
-{{PROJECT_NAME}}/
+engineering-harness/
 ├── src/                    # {{description}}
 ├── tests/                  # {{description}}
 ├── docs/                   # Engineering docs (harness-managed)

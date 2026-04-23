@@ -146,7 +146,7 @@ would be useful in other projects — promote it to the central Knowledge Base:
 - Periodically **compile** Daily digests into wiki pages so knowledge compounds
 - Periodically **lint** for orphans, contradictions, and stale claims
 
-The KB at `D:\Projects\KnowledgeBase` is managed by the knowledgebase skill
+The canonical KnowledgeBase repo at `~/KnowledgeBase` is indexed by GBrain
 (operations: query, ingest, compile, lint, capture). It compounds learnings
 across all projects and sessions. The promotion decision is simple: if you
 would want to know this in a different repo, it belongs in the KB, not just
@@ -166,8 +166,8 @@ these signals (not all will be measurable in every repo):
 | Manual setup steps | ↓ fewer is better | Count pre-work steps before useful output begins |
 | Doc staleness ratio | ↓ lower is better | Fraction of docs flagged stale in last sweep |
 | Garbage collection rate | ↑ steady is good | Docs archived or deleted per improvement cycle |
-| KB compile freshness | ↑ recent is better | Last compile date from `kb-status.py` — Daily digests should be promoted regularly |
-| KB lint health | ↓ fewer is better | Orphan and broken-link count from `kb-lint.py` |
+| KB sync freshness | ↑ recent is better | Last sync date from `gbrain stats` — Daily digests should be promoted regularly |
+| KB extract health | ↓ fewer is better | Orphan and broken-link count from `gbrain extract all` |
 
 The harness is working when agents need less ad hoc rescue and more of the
 expected behavior emerges from the repository itself.

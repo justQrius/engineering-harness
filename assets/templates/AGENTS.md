@@ -147,18 +147,15 @@ Key engineering docs:
 
 ## Cross-Project Knowledge Base
 
-The Knowledge Base at `D:\Projects\KnowledgeBase` is a persistent, compounding
-intelligence layer shared across all projects. Use the `knowledgebase` skill
-(operations: query, ingest, compile, lint, capture) to search for prior art
-before research and to capture durable learnings at session end.
+The canonical KnowledgeBase repo at `~/KnowledgeBase`, indexed by GBrain, is a persistent, compounding intelligence layer shared across all projects. Use GBrain operations to search for prior art before research and to capture durable learnings at session end.
 
-| Operation | Script (from any project) | When |
+| Operation | Command (from any project) | When |
 |-----------|---------------------------|------|
-| **Query** | `python D:\Projects\KnowledgeBase\skill\scripts\kb-query.py "topic" --log` | Before research — check what's already known |
+| **Query** | `gbrain query "question"` or `gbrain search "topic"` | Before research — check what's already known |
 | **Capture** | Create `Raw/Sessions/`, wiki pages, update `index.md` and `log.md` | After significant work — capture durable findings |
-| **Compile** | `python D:\Projects\KnowledgeBase\skill\scripts\kb-compile.py --dry-run` | When Daily digests have accumulated |
-| **Lint** | `python D:\Projects\KnowledgeBase\skill\scripts\kb-lint.py --check all` | After compile, periodically |
-| **Status** | `python D:\Projects\KnowledgeBase\skill\scripts\kb-status.py` | At session start to check KB health |
+| **Sync** | `gbrain sync` then `gbrain embed --stale` | When pages have been added or edited |
+| **Extract** | `gbrain extract all` | After sync, periodically |
+| **Stats** | `gbrain stats` | At session start to check KB health |
 
 Only promote learnings that apply beyond this repo.
 

@@ -1,23 +1,23 @@
-# CLAUDE.md - {{PROJECT_NAME}}
+# AGENTS.md - engineering-harness
 
-Developer context for Claude Code sessions. Read this before making changes.
-Keep this file semantically aligned with `AGENTS.md`; only filename-specific and
-agent-perspective language should differ.
+Developer context for Codex and other coding agent sessions. Read this before
+making changes. Keep this file semantically aligned with `CLAUDE.md`; only
+filename-specific and agent-perspective language should differ.
 
 ## Session-Start Protocol
 
 Every session begins here. Follow these steps in order before doing any work:
 
 1. **Read `.handoff/CURRENT.md`** — is there an active work packet?
-   - If `approved` or `in-progress`: continue that work. Read the packet fully.
-   - If `review-requested`: perform review (if you are the Reviewer).
-   - If `done` or empty: check `.handoff/BACKLOG.md` for the next item.
+   - If `approved`: this is your implementation target. Read the packet fully.
+   - If `in-progress`: continue where the last session left off.
+   - If `review-requested` or `done` or empty: stop. Ask the user what to do.
 2. **Read `.handoff/DECISIONS.md`** — know what has been decided.
 3. **Identify your role** — check the role table below. Stay in your lane.
-4. **If no packet exists and the user says "continue" or "start next":**
-   follow the Planning Process below to create one.
+4. **Only implement work inside an approved packet.** If there is no approved
+   packet, do not start coding.
 
-Do not start implementation without an approved packet. Do not skip this protocol.
+Do not skip this protocol. Do not start implementation without an approved packet.
 
 ## Development Loop (Embedded)
 
@@ -28,7 +28,7 @@ This is the full SDLC. Every non-trivial change follows this loop:
 1. **Read canon** — product doctrine, engineering doctrine, decisions, current packet
 2. **Plan the work** — follow the Planning Process:
    - Clarify: root problem, user job, constraints
-   - Check prior art: query the Knowledge Base, research/, docs/, decisions
+   - Check prior art: research/, docs/, decisions
    - Decide artifacts: research doc? design doc? ADR? straight to packet?
    - Decompose large work into thin slices (each independently valuable,
      deployable, testable)
@@ -56,18 +56,18 @@ This is the full SDLC. Every non-trivial change follows this loop:
 ### Learn (Steps 9–10)
 
 9. **Observe** — watch what happens post-deploy
-10. **Fold learning back** — update decisions, capture durable learnings via the Knowledge Base
+10. **Fold learning back** — update decisions, capture learnings
 
 Details: `docs/engineering/10-development-loop.md`
 
 ## Planning Process (Embedded)
 
-When no packet exists or a new one is needed:
+When the Planner creates a new packet, this is the flow:
 
 ```
 Backlog idea
   → Clarify problem (root cause, user job, constraints)
-  → Check prior art (KB, research/, docs/, decisions)
+  → Check prior art (research/, docs/, decisions)
   → Decide artifacts needed:
       Research doc?  → yes if unfamiliar problem space → research/
       Design doc?    → yes if new feature/API/subsystem → docs/design/
@@ -78,7 +78,8 @@ Backlog idea
   → Owner approval (hard gate)
 ```
 
-Backlog priority: blocking deps → risk reduction → user value → learning → effort
+As Implementor, your entry point is an **approved packet**. If you think the
+packet is wrong or incomplete, raise it — do not silently deviate.
 
 Details: `docs/engineering/20-planning-process.md`
 
@@ -101,12 +102,13 @@ and the repo-level roles are clear.
 ## Rules for This Agent
 
 1. **Follow the Session-Start Protocol** at the beginning of every session.
-2. Do not write implementation code unless assigned the Implementor role.
-3. Always check `.handoff/CURRENT.md` at session start.
-4. Draft complete work packets, not vague task ideas.
-5. Review diffs for correctness, regressions, security, missing tests, and deploy risk.
-6. Add timestamped notes with your agent prefix in UTC ISO-8601 form.
-7. Update `.handoff/DECISIONS.md` when a durable architectural choice is made.
+2. Always read `.handoff/CURRENT.md` before starting meaningful work.
+3. Only implement work that is inside an approved packet.
+4. Review packet feasibility critically before execution.
+5. Add timestamped notes with your agent prefix in UTC ISO-8601 form.
+6. Respect role boundaries — do not take on capabilities assigned to other agents.
+7. When implementation completes, move the packet to `review-requested` and
+   summarize what changed.
 8. Do not start implementation without an approved packet.
 
 ## Repo Operating System
@@ -130,8 +132,8 @@ Key engineering docs:
 
 ## Session-End Checklist
 
-1. Update `.handoff/CURRENT.md` with current state
-2. If durable learnings emerged, capture via the Knowledge Base (see Cross-Project Knowledge Base section)
+1. Update `.handoff/CURRENT.md` with current state and progress notes
+2. If you couldn't finish, leave clear notes on where you stopped and what's next
 3. If improvement opportunities found, note in `.handoff/REVIEWS.md`
 
 ## Required Shared Files
@@ -155,8 +157,7 @@ The canonical KnowledgeBase repo at `~/KnowledgeBase`, indexed by GBrain, is a p
 | **Extract** | `gbrain extract all` | After sync, periodically |
 | **Stats** | `gbrain stats` | At session start to check KB health |
 
-Only promote learnings that would be useful in a different repo. Repo-specific
-decisions stay in `.handoff/DECISIONS.md`.
+Only promote learnings that apply beyond this repo.
 
 ## Project Layout
 
@@ -169,7 +170,7 @@ decisions stay in `.handoff/DECISIONS.md`.
 <!-- - Describe the build/test/run commands -->
 
 ```
-{{PROJECT_NAME}}/
+engineering-harness/
 ├── src/                    # {{description}}
 ├── tests/                  # {{description}}
 ├── docs/                   # Engineering docs (harness-managed)

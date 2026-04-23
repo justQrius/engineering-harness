@@ -48,7 +48,7 @@ research or discussion.
 
 Before creating new artifacts:
 
-- Search the Knowledge Base: query via `python D:\Projects\KnowledgeBase\skill\scripts\kb-query.py "topic" --log`
+- Search the Knowledge Base: query via `gbrain query "question"` or `gbrain search "topic"`
 - Check `research/INDEX.md` for existing analysis
 - Check `docs/planning/` for existing roadmaps or phase maps
 - Check `docs/architecture/` for relevant ADRs

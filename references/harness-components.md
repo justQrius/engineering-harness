@@ -134,9 +134,7 @@ Purpose:
 
 Implementation:
 
-The Knowledge Base skill (`D:\Projects\KnowledgeBase\skill\SKILL.md`) manages
-a persistent Knowledge Base at `D:\Projects\KnowledgeBase`. Wire it into the
-harness at these points:
+The canonical KnowledgeBase repo at `~/KnowledgeBase`, indexed by GBrain, should be wired into the harness at these points:
 
 - **Research phase**: before deep-diving, **query** the KB to check existing
   concepts, patterns, and prior session findings
@@ -154,13 +152,13 @@ harness at these points:
 
 Key operations and scripts:
 
-| Operation | Script | When to use |
-|-----------|--------|-------------|
-| **Query** | `python skill/scripts/kb-query.py "topic" --log` | Before research — check what's already known |
+| Operation | Command | When to use |
+|-----------|---------|-------------|
+| **Query** | `gbrain query "question"` or `gbrain search "topic"` | Before research — check what's already known |
 | **Capture** | Create `Raw/Sessions/`, wiki pages, update `index.md` and `log.md` | After significant work — capture durable findings |
-| **Compile** | `python skill/scripts/kb-compile.py --dry-run` then without `--dry-run` | When Daily digests have accumulated |
-| **Lint** | `python skill/scripts/kb-lint.py --check all` | After compile, periodically |
-| **Status** | `python skill/scripts/kb-status.py` | At session start to check KB health |
+| **Sync** | `gbrain sync` then `gbrain embed --stale` | When pages have been added or edited |
+| **Extract** | `gbrain extract all` | After sync, periodically |
+| **Stats** | `gbrain stats` | At session start to check KB health |
 
 The KB is not a replacement for repo-local docs. Repo-specific decisions stay
 in `.handoff/DECISIONS.md`. The KB captures what applies beyond the repo.

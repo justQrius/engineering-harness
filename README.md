@@ -90,15 +90,17 @@ script:
 
 ## Cross-Project Knowledge Base
 
-The harness integrates with a central Knowledge Base at `D:\Projects\KnowledgeBase`.
-Operations (query, capture, compile, lint, status) are available via Python scripts
+The harness integrates with the canonical KnowledgeBase repo at `~/KnowledgeBase`, indexed by GBrain.
+Operations (query, capture, sync, extract, stats) are available via the GBrain CLI
 that any agent can invoke from any project directory:
 
 ```bash
-python D:\Projects\KnowledgeBase\skill\scripts\kb-query.py "topic" --log
-python D:\Projects\KnowledgeBase\skill\scripts\kb-compile.py --dry-run
-python D:\Projects\KnowledgeBase\skill\scripts\kb-lint.py --check all
-python D:\Projects\KnowledgeBase\skill\scripts\kb-status.py
+gbrain query "question"          # Semantic search across KB
+gbrain search "topic"            # Keyword search across KB
+gbrain sync                     # Re-index pages from repo
+gbrain embed --stale            # Embed unembedded chunks
+gbrain extract all              # Extract links and timeline
+gbrain stats                    # Show pages, chunks, embeddings
 ```
 
 ## Deployment

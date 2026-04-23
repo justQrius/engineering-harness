@@ -24,18 +24,18 @@ from pathlib import Path
 KB_SECTION = """\
 ## Cross-Project Knowledge Base
 
-The Knowledge Base at `D:\\Projects\\KnowledgeBase` is a persistent, compounding
-intelligence layer shared across all projects. Use the `knowledgebase` skill
-(operations: query, ingest, compile, lint, capture) to search for prior art
+The Knowledge Base at `~/KnowledgeBase` is a persistent, compounding
+intelligence layer shared across all projects. Use GBrain
+(operations: query, search, sync, extract, stats, capture) to search for prior art
 before research and to capture durable learnings at session end.
 
-| Operation | Script (from any project) | When |
+| Operation | Command (from any project) | When |
 |-----------|---------------------------|------|
-| **Query** | `python D:\\Projects\\KnowledgeBase\\skill\\scripts\\kb-query.py "topic" --log` | Before research — check what's already known |
+| **Query** | `gbrain query "question"` or `gbrain search "topic"` | Before research — check what's already known |
 | **Capture** | Create `Raw/Sessions/`, wiki pages, update `index.md` and `log.md` | After significant work — capture durable findings |
-| **Compile** | `python D:\\Projects\\KnowledgeBase\\skill\\scripts\\kb-compile.py --dry-run` | When Daily digests have accumulated |
-| **Lint** | `python D:\\Projects\\KnowledgeBase\\skill\\scripts\\kb-lint.py --check all` | After compile, periodically |
-| **Status** | `python D:\\Projects\\KnowledgeBase\\skill\\scripts\\kb-status.py` | At session start to check KB health |
+| **Sync** | `gbrain sync` then `gbrain embed --stale` | When pages have been added or edited |
+| **Extract** | `gbrain extract all` | After sync, periodically |
+| **Stats** | `gbrain stats` | At session start to check KB health |
 
 Only promote learnings that would be useful in a different repo. Repo-specific
 decisions stay in `.handoff/DECISIONS.md`.
@@ -160,11 +160,11 @@ def apply_inline_replacements(repo_root: Path) -> list[str]:
                 continue
 
             # Check if KB reference already exists (skip if it does)
-            kb_markers = ["Knowledge Base", "kb-query", "kb-compile"]
+            kb_markers = ["Knowledge Base", "gbrain", "gbrain query"]
             if any(marker in content for marker in kb_markers):
                 # The line already has a KB reference — don't double up
                 # But check if it's the old /kb command style that needs updating
-                if "/kb " in content and "kb-query" not in content:
+                if "/kb " in content and "gbrain" not in content:
                     # Has /kb commands but not script-style references — needs update
                     pass
                 else:

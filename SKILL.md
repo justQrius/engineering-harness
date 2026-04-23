@@ -49,7 +49,7 @@ mode-specific checklist.
 Before starting research or design, query the central Knowledge Base for
 existing concepts, patterns, and session findings that may inform the work.
 
-The KB (`D:\Projects\KnowledgeBase`) is a cross-project intelligence layer
+The canonical KB repo at `~/KnowledgeBase`, indexed by GBrain, is a cross-project intelligence layer
 managed by the `knowledgebase` skill. It accumulates research, architectural
 decisions, patterns, and tool knowledge across all projects. Checking it before
 work prevents re-deriving what was already discovered in a previous session or
@@ -59,10 +59,10 @@ project.
 
 | Operation | How | When |
 |-----------|-----|------|
-| **query** | Search with `mcp__qmd__query` or run `python skill/scripts/kb-query.py "topic" --log` | Before research, when answering questions |
-| **compile** | Run `python skill/scripts/kb-compile.py --dry-run` then without `--dry-run` | When Daily digests have accumulated |
-| **lint** | Run `python skill/scripts/kb-lint.py --check all` | After compile, periodically |
-| **status** | Run `python skill/scripts/kb-status.py` | At session start to check KB health |
+| **query** | Search with `gbrain__query` / `gbrain__search` or run `gbrain query "question"` / `gbrain search "topic"` | Before research, when answering questions |
+| **sync** | Run `gbrain sync` then `gbrain embed --stale` | When new pages or edits have accumulated |
+| **extract** | Run `gbrain extract all` | After sync, periodically |
+| **stats** | Run `gbrain stats` | At session start to check KB health |
 | **capture** | Create `Raw/Sessions/`, wiki pages, update `index.md` and `log.md` | When session yields findings |
 
 ### 2. Preserve local truth and adapt the harness
@@ -337,9 +337,9 @@ to the central Knowledge Base using the `knowledgebase` skill:
 | Architectural insight with broad applicability | **capture** (create `Raw/Sessions/` + wiki pages) |
 | Research findings worth preserving | **capture** (create `Raw/Papers/` + wiki pages) |
 | Recurring review finding (class-level, not instance) | **capture** (create `Patterns/` page) |
-| Question that was answered during work | **query** + **file-back** (`kb-query.py --log --file-back`) |
-| Daily digests accumulated without promotion | **compile** (`kb-compile.py`) |
-| Orphaned pages or broken links found | **lint** (`kb-lint.py --check all`) |
+| Question that was answered during work | **query** + **file-back** (run `gbrain query`, then write result to wiki page) |
+| Daily digests accumulated without promotion | **sync** (`gbrain sync` then `gbrain embed --stale`) |
+| Orphaned pages or broken links found | **extract** (`gbrain extract all`) + manual review |
 
 The KB is not a mirror of repo-local docs. Only promote learnings that would
 be useful in a different project or a future session with no repo context.
