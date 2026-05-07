@@ -5,6 +5,13 @@ loop for non-trivial work.
 
 ## Phase 1: Orient
 
+### Lane policy
+
+For Shaktisinh's default workflow, Morpheus conducts, Claude Code via Ollama
+cloud implements, and Codex reviews or challenges sparsely at gates. Default
+Claude Code using first-party model access is a manual reserve lane only, not
+the routine implementation or review path.
+
 ### Step 1 — Read the canon
 
 Read the foundational docs before touching anything:

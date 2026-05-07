@@ -13,6 +13,18 @@ Treat the repository as the system of record for agent instructions, planning,
 design, architecture, workflow, decisions, reviews, releases, and recurring
 lessons.
 
+## Source of Truth and Agent Installation
+
+The canonical engineering-harness skill repository lives at
+`/home/justqrius/.openclaw/workspace/engineering-harness`. Make changes there
+first, then install or update the Claude Code and Codex skill copies:
+
+- Claude Code: `/home/justqrius/.claude/skills/engineering-harness/`
+- Codex: `/home/justqrius/.codex/skills/engineering-harness/`
+
+Do not treat installed copies as the source of truth. They are deployment targets
+for the coding agents.
+
 ## Workflow
 
 ### 1. Classify the repository first
@@ -245,11 +257,28 @@ when adapting the project CI job to the actual language stack.
 Make the repo-level role contract explicit using capability-based roles, not
 product names. Tools change; capabilities persist.
 
+Default lane policy for Shaktisinh's engineering workflow:
+
+- **Morpheus** conducts the workflow: packet framing, context shaping, lane
+  prompts, tool/skill routing, verification, and final integration judgment.
+- **Claude Code via Ollama cloud** is the default implementation lane because it
+  has the higher practical rate-limit budget for long edit/test/fix loops.
+- **Codex** is a sparse independent review and challenge lane. Use it at gates:
+  plan critique for complex work, diff review, adversarial/security challenge,
+  or correction review when the implementation lane gets stuck.
+- **Default Claude Code using first-party model access** is a manual reserve lane
+  only. Do not put it on the default hot path. Use it only when Shaktisinh
+  explicitly asks for a premium reserve judgment pass.
+
+This preserves limited first-party/Codex rate limits for high-leverage judgment
+instead of spending them on routine implementation tokens.
+
 | Role | Capability | Typical assignment |
 |------|-----------|-------------------|
-| **Planner** | Designs work packets, breaks down problems, sequences work | Claude Code, human architect |
-| **Implementor** | Writes and integrates code within approved packets | Codex, Claude Code, or any code agent |
-| **Reviewer** | Reviews diffs for correctness, regressions, security, deploy risk | Claude Code, human lead |
+| **Orchestrator** | Frames packets, routes tools/skills, manages context, verifies | Morpheus |
+| **Planner** | Designs work packets, breaks down problems, sequences work | Morpheus, with sparse Codex/Claude reserve critique when useful |
+| **Implementor** | Writes and integrates code within approved packets | Claude Code via Ollama cloud |
+| **Reviewer** | Reviews diffs for correctness, regressions, security, deploy risk | Codex at gates; Morpheus verifies deterministically |
 | **Investigator** | Parallel support: research, debugging, exploration in isolation | Any agent in a support lane |
 | **Approver** | Final sign-off — always human | Owner / tech lead |
 

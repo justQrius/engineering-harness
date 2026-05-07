@@ -88,11 +88,25 @@ Details: `docs/engineering/20-planning-process.md`
 This repo uses capability-based roles. Assign agents and humans to roles based
 on what they do best in this repo, not by product identity.
 
+Default lane policy for Shaktisinh's engineering workflow:
+
+- **Morpheus** conducts the workflow: packet framing, context shaping, lane
+  prompts, tool/skill routing, verification, and final integration judgment.
+- **Claude Code via Ollama cloud** is the default implementation lane for long
+  edit/test/fix loops.
+- **Codex** is a sparse independent review and challenge lane at gates:
+  plan critique, diff review, adversarial/security challenge, or correction
+  review when implementation gets stuck.
+- **Default Claude Code using first-party model access** is a manual reserve lane
+  only, used only when Shaktisinh explicitly asks for a premium reserve judgment
+  pass. It is not on the default hot path.
+
 | Role | Capability | Current assignment |
 |------|-----------|-------------------|
-| **Planner** | Designs work packets, sequences work | {{PLANNER — e.g. Claude Code}} |
-| **Implementor** | Writes and integrates code | {{IMPLEMENTOR — e.g. Codex}} |
-| **Reviewer** | Reviews diffs for correctness, security, deploy risk | {{REVIEWER — e.g. Claude Code}} |
+| **Orchestrator** | Frames packets, routes tools/skills, manages context, verifies | {{ORCHESTRATOR — e.g. Morpheus}} |
+| **Planner** | Designs work packets, sequences work | {{PLANNER — e.g. Morpheus}} |
+| **Implementor** | Writes and integrates code | {{IMPLEMENTOR — e.g. Claude Code via Ollama cloud}} |
+| **Reviewer** | Reviews diffs for correctness, security, deploy risk | {{REVIEWER — e.g. Codex at gates}} |
 | **Investigator** | Parallel research, debugging, exploration | {{INVESTIGATOR — e.g. any agent}} |
 | **Approver** | Final sign-off (always human) | {{APPROVER — e.g. Owner}} |
 
@@ -107,9 +121,11 @@ and the repo-level roles are clear.
 4. Review packet feasibility critically before execution.
 5. Add timestamped notes with your agent prefix in UTC ISO-8601 form.
 6. Respect role boundaries — do not take on capabilities assigned to other agents.
-7. When implementation completes, move the packet to `review-requested` and
+7. Preserve rate-limited lanes: use Codex and first-party Claude only for explicit
+   review/challenge/reserve judgment, not routine implementation.
+8. When implementation completes, move the packet to `review-requested` and
    summarize what changed.
-8. Do not start implementation without an approved packet.
+9. Do not start implementation without an approved packet.
 
 ## Repo Operating System
 
