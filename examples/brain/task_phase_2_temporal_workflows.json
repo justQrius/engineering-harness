@@ -1,0 +1,12 @@
+{
+  "type": "Task",
+  "id": "task/brain-phase-2-temporal-workflows",
+  "title": "Phase 2: durable Temporal workflows for research, KB sync, content pipeline, and agent handoff",
+  "owner": "agent/codex",
+  "status": "todo",
+  "project": "project/brain-implementation",
+  "created_at": "2026-05-20T00:00:00Z",
+  "source_links": [
+    "source/2026-05-20-brain-architecture-session"
+  ]
+}

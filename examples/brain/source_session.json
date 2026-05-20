@@ -1,0 +1,10 @@
+{
+  "type": "Source",
+  "id": "source/2026-05-20-brain-architecture-session",
+  "title": "Brain architecture implementation session",
+  "source_type": "session",
+  "created_at": "2026-05-20T00:00:00Z",
+  "source_links": [
+    "workspace-session:2026-05-20-brain-architecture"
+  ]
+}

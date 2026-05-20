@@ -1,0 +1,12 @@
+{
+  "type": "Task",
+  "id": "task/brain-phase-3-state-machines",
+  "title": "Phase 3: explicit state machines for complex routing and approval flows",
+  "owner": "agent/codex",
+  "status": "todo",
+  "project": "project/brain-implementation",
+  "created_at": "2026-05-20T00:00:00Z",
+  "source_links": [
+    "source/2026-05-20-brain-architecture-session"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "Claim",
+  "id": "claim/gbrain-existing-schema-page-link-timeline",
+  "entity": "entity/gbrain",
+  "claim": "Current GBrain storage is built around pages, chunks, links, tags, raw data, timeline entries, versions, ingest logs, files, and Minions jobs rather than domain-specific typed nodes.",
+  "confidence": 0.95,
+  "created_at": "2026-05-20T00:00:00Z",
+  "source_links": [
+    "source/2026-05-20-brain-architecture-session"
+  ]
+}

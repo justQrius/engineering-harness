@@ -1,0 +1,10 @@
+{
+  "type": "Entity",
+  "id": "entity/shaktisinh",
+  "name": "Shaktisinh",
+  "subtype": "person",
+  "created_at": "2026-05-20T00:00:00Z",
+  "source_links": [
+    "source/2026-05-20-brain-architecture-session"
+  ]
+}

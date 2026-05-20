@@ -1,0 +1,12 @@
+{
+  "type": "Task",
+  "id": "task/brain-phase-1-typed-spine",
+  "title": "Phase 1: typed schema, writer, event pages, projections, examples, tests, and seed records",
+  "owner": "agent/codex",
+  "status": "doing",
+  "project": "project/brain-implementation",
+  "created_at": "2026-05-20T00:00:00Z",
+  "source_links": [
+    "source/2026-05-20-brain-architecture-session"
+  ]
+}

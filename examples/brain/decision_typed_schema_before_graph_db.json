@@ -1,0 +1,12 @@
+{
+  "type": "Decision",
+  "id": "decision/typed-schema-before-graph-db",
+  "decision": "Use a typed append-only schema and projections before introducing a graph database as a source of truth.",
+  "made_by": "agent/codex",
+  "decided_at": "2026-05-20T00:00:00Z",
+  "rationale": "A typed JSONL ledger plus markdown and SQLite projections gives agents validation, provenance, replayability, GBrain indexing, and fast local queries without coupling Phase 1 to a graph database or GBrain internal tables.",
+  "created_at": "2026-05-20T00:00:00Z",
+  "source_links": [
+    "source/2026-05-20-brain-architecture-session"
+  ]
+}

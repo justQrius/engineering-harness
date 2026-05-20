@@ -1,0 +1,12 @@
+{
+  "type": "Task",
+  "id": "task/brain-phase-4-query-accelerator",
+  "title": "Phase 4: graph database or Postgres query accelerator fed by the typed ledger",
+  "owner": "agent/codex",
+  "status": "todo",
+  "project": "project/brain-implementation",
+  "created_at": "2026-05-20T00:00:00Z",
+  "source_links": [
+    "source/2026-05-20-brain-architecture-session"
+  ]
+}
