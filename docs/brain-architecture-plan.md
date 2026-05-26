@@ -19,7 +19,7 @@ Date: 2026-05-20
 
 ### Hermes Agent Setup
 
-- Hermes memory points Codex and Claude work at `/home/justqrius/.openclaw/workspace/engineering-harness`.
+- Hermes memory points Codex and Claude work at `/home/justqrius/.hermes/profiles/hermes-lab/workspace/engineering-harness`.
 - Hermes memory says GBrain is the canonical source and should be written directly, not treated as a throwaway local repo file.
 - Hermes currently keeps its own operational memories under `/home/justqrius/.hermes/profiles/hermes-lab/memories/`; those are runtime memory, not the canonical world-knowledge brain.
 - The current Hermes profile has MCP-capable runtime files, but this plan should not depend on Hermes-only APIs. The typed brain writer stays as a plain CLI/importable Python layer usable by OpenClaw, Hermes, Codex, Claude Code, cron, and Temporal workers.

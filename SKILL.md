@@ -16,7 +16,7 @@ lessons.
 ## Source of Truth and Agent Installation
 
 The canonical engineering-harness skill repository lives at
-`/home/justqrius/.openclaw/workspace/engineering-harness`. Make changes there
+`/home/justqrius/.hermes/profiles/hermes-lab/workspace/engineering-harness`. Make changes there
 first, then install or update the Claude Code and Codex skill copies:
 
 - Claude Code: `/home/justqrius/.claude/skills/engineering-harness/`
