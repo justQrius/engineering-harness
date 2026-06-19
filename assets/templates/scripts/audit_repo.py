@@ -9,6 +9,7 @@ import argparse
 import json
 import re
 from pathlib import Path
+from typing import Optional
 
 
 REQUIRED_HEADER_FIELDS = [
@@ -66,8 +67,21 @@ ALLOWED_STATUS_PREFIXES = [
 ]
 
 
-def load_text(path: Path) -> str:
-    return path.read_text(encoding="utf-8")
+def load_text(path: Path, issues: Optional[list[str]] = None, repo_root: Optional[Path] = None) -> str:
+    try:
+        return path.read_text(encoding="utf-8")
+    except UnicodeDecodeError as exc:
+        label = path.name
+        if repo_root is not None:
+            try:
+                label = path.relative_to(repo_root).as_posix()
+            except ValueError:
+                label = path.as_posix()
+        message = f"{label} is not valid UTF-8 at byte {exc.start}; convert the file to UTF-8 before rerunning harness checks"
+        if issues is None:
+            raise ValueError(message) from exc
+        issues.append(message)
+        return ""
 
 
 def parse_header_fields(text: str) -> dict[str, str]:
@@ -135,10 +149,12 @@ def audit_repo(repo_root: Path) -> dict:
     if issues:
         return {"issues": issues, "warnings": warnings}
 
-    current_text = load_text(current_path)
-    reviews_text = load_text(reviews_path)
-    releases_text = load_text(releases_path)
-    template_text = load_text(template_path)
+    current_text = load_text(current_path, issues, repo_root)
+    reviews_text = load_text(reviews_path, issues, repo_root)
+    releases_text = load_text(releases_path, issues, repo_root)
+    template_text = load_text(template_path, issues, repo_root)
+    if issues:
+        return {"issues": issues, "warnings": warnings}
     header_fields = parse_header_fields(current_text)
 
     for field in REQUIRED_HEADER_FIELDS:
@@ -181,8 +197,12 @@ def audit_repo(repo_root: Path) -> dict:
         warnings.append("work-packet template appears to contain dated placeholder note entries")
 
     if agents_path.exists() and claude_path.exists():
-        agents_invariants = extract_current_repo_invariants(load_text(agents_path))
-        claude_invariants = extract_current_repo_invariants(load_text(claude_path))
+        agents_text = load_text(agents_path, issues, repo_root)
+        claude_text = load_text(claude_path, issues, repo_root)
+        if issues:
+            return {"issues": issues, "warnings": warnings}
+        agents_invariants = extract_current_repo_invariants(agents_text)
+        claude_invariants = extract_current_repo_invariants(claude_text)
         if agents_invariants != claude_invariants:
             warnings.append("AGENTS.md and CLAUDE.md differ in Current Repo Invariants")
 

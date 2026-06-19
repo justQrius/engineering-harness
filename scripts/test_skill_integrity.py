@@ -55,6 +55,10 @@ def main() -> int:
         ["python", str(skill_root / "scripts" / "test_template_audit_contract.py")],
         check=True,
     )
+    subprocess.run(
+        ["python", str(skill_root / "scripts" / "test_harness_failure_modes.py")],
+        check=True,
+    )
 
     print("Engineering-harness skill integrity: pass")
     return 0

@@ -51,6 +51,15 @@ def run_git(repo_root: Path, *args: str) -> str:
     return result.stdout
 
 
+
+
+def is_git_worktree(repo_root: Path) -> bool:
+    try:
+        output = run_git(repo_root, "rev-parse", "--is-inside-work-tree")
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return False
+    return output.strip().lower() == "true"
+
 def parse_changed_files(repo_root: Path) -> list[str]:
     output = run_git(repo_root, "status", "--porcelain")
     changed: list[str] = []
@@ -132,6 +141,10 @@ def check_scope(repo_root: Path) -> dict:
     current_path = repo_root / ".handoff" / "CURRENT.md"
     if not current_path.exists():
         return {"issues": ["Missing .handoff/CURRENT.md"], "warnings": warnings}
+
+    if not is_git_worktree(repo_root):
+        warnings.append("Not a git worktree; skipping diff-aware packet scope check")
+        return {"issues": issues, "warnings": warnings, "changed_files": []}
 
     changed_files = parse_changed_files(repo_root)
     if not changed_files:
