@@ -13,7 +13,7 @@
 - Support scope: N/A
 - Research/design support: AdiAstra Harness Checks failure on 2026-06-19
 - Created: 2026-06-19T14:58:21Z
-- Updated: 2026-06-19T15:05:30Z
+- Updated: 2026-06-19T15:08:25Z
 
 ## Problem
 
@@ -145,3 +145,8 @@ Revert the script/workflow edits and restore the previous installed skill files 
 - Implemented canonical harness failure-mode hardening and workflow warning cleanup.
 - Synced the maintained script/workflow/template changes into `C:/Users/shakt/.codex/skills/engineering-harness`.
 - Verified canonical tests and installed skill validation pass.
+
+### 2026-06-19T15:08:25Z - Codex CI follow-up
+
+- Remote harness workflow failed because `go install github.com/go-task/task/v3/cmd/task@latest` now resolves to Task v3.51.1, which requires Go >= 1.25.10.
+- Updated the reusable workflow and workflow template from Go 1.24 to Go 1.25.10.

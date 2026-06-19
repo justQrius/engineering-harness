@@ -30,5 +30,6 @@ No reviews recorded yet.
   - Harness workflow templates now use current GitHub Action major versions and disable Go setup cache to avoid `go.sum` cache warnings in non-Go repos.
   - Added regression coverage for invalid UTF-8 and non-git scope checks.
   - Synced the maintained updates into the installed Codex engineering-harness skill copy.
+  - Remote workflow follow-up: Task latest now requires Go >= 1.25.10, so the reusable workflow and template now set Go 1.25.10.
 - Required follow-up:
   - Consider applying the updated workflow template to existing repos when their next packet touches CI.
