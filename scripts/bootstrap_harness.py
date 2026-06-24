@@ -24,7 +24,7 @@ from pathlib import Path
 KB_SECTION = """\
 ## Cross-Project Knowledge Base
 
-The Knowledge Base at `~/KnowledgeBase` is a persistent, compounding
+The Knowledge Base at `D:/Projects/KnowledgeBase` is a persistent, compounding
 intelligence layer shared across all projects. Use GBrain
 (operations: query, search, sync, extract, stats, capture) to search for prior art
 before research and to capture durable learnings at session end.

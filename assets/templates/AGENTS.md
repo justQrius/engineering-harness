@@ -163,7 +163,7 @@ Key engineering docs:
 
 ## Cross-Project Knowledge Base
 
-The canonical KnowledgeBase repo at `~/KnowledgeBase`, indexed by GBrain, is a persistent, compounding intelligence layer shared across all projects. Use GBrain operations to search for prior art before research and to capture durable learnings at session end.
+The canonical KnowledgeBase repo at `D:/Projects/KnowledgeBase`, indexed by GBrain, is a persistent, compounding intelligence layer shared across all projects. Use GBrain operations to search for prior art before research and to capture durable learnings at session end.
 
 | Operation | Command (from any project) | When |
 |-----------|---------------------------|------|

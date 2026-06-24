@@ -122,8 +122,8 @@ Do not replace GBrain in Phase 1. Add a typed ingestion spine in front of it:
 Default runtime paths:
 
 - Event ledger: `~/.gbrain/typed/events.jsonl`
-- Markdown events: `~/KnowledgeBase/TypedBrain/events/*.md`
-- Markdown projections: `~/KnowledgeBase/TypedBrain/projections/*.md`
+- Markdown events: `D:/Projects/KnowledgeBase/TypedBrain/events/*.md`
+- Markdown projections: `D:/Projects/KnowledgeBase/TypedBrain/projections/*.md`
 - SQLite projection: `~/.gbrain/typed/brain_projection.sqlite`
 
 The event ledger is the typed source of truth. Markdown event pages and projections are GBrain ingestion surfaces. SQLite is a local query accelerator.

@@ -61,7 +61,7 @@ mode-specific checklist.
 Before starting research or design, query the central Knowledge Base for
 existing concepts, patterns, and session findings that may inform the work.
 
-The canonical KB repo at `~/KnowledgeBase`, indexed by GBrain, is a cross-project intelligence layer
+The canonical KB repo at `D:/Projects/KnowledgeBase`, indexed by GBrain, is a cross-project intelligence layer
 managed by the `knowledgebase` skill. It accumulates research, architectural
 decisions, patterns, and tool knowledge across all projects. Checking it before
 work prevents re-deriving what was already discovered in a previous session or

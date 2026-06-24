@@ -134,7 +134,7 @@ Purpose:
 
 Implementation:
 
-The canonical KnowledgeBase repo at `~/KnowledgeBase`, indexed by GBrain, should be wired into the harness at these points:
+The canonical KnowledgeBase repo at `D:/Projects/KnowledgeBase`, indexed by GBrain, should be wired into the harness at these points:
 
 - **Research phase**: before deep-diving, **query** the KB to check existing
   concepts, patterns, and prior session findings

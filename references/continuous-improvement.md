@@ -146,7 +146,7 @@ would be useful in other projects — promote it to the central Knowledge Base:
 - Periodically **compile** Daily digests into wiki pages so knowledge compounds
 - Periodically **lint** for orphans, contradictions, and stale claims
 
-The canonical KnowledgeBase repo at `~/KnowledgeBase` is indexed by GBrain
+The canonical KnowledgeBase repo at `D:/Projects/KnowledgeBase` is indexed by GBrain
 (operations: query, ingest, compile, lint, capture). It compounds learnings
 across all projects and sessions. The promotion decision is simple: if you
 would want to know this in a different repo, it belongs in the KB, not just

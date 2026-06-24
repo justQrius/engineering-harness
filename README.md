@@ -90,7 +90,7 @@ script:
 
 ## Cross-Project Knowledge Base
 
-The harness integrates with the canonical KnowledgeBase repo at `~/KnowledgeBase`, indexed by GBrain.
+The harness integrates with the canonical KnowledgeBase repo at `D:/Projects/KnowledgeBase`, indexed by GBrain.
 Operations (query, capture, sync, extract, stats) are available via the GBrain CLI
 that any agent can invoke from any project directory:
 
